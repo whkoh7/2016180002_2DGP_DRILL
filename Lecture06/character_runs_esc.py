@@ -4,7 +4,6 @@ open_canvas()
 grass = load_image('grass.png')
 character = load_image('animation_sheet.png')
 
-
 running = True
 x = 0
 frame = 0
@@ -12,6 +11,13 @@ frame = 0
 
 def handle_events():
     # fill here
+    global running
+    events = get_events()
+    for event in events:
+        if event.type == SDL_QUIT:
+            running = False
+        elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
+            running = False
     pass
 
 
@@ -27,4 +33,3 @@ while x < 800 and running:
     delay(0.05)
 
 close_canvas()
-
