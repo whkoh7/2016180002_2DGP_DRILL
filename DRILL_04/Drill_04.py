@@ -29,7 +29,6 @@ while True:
         get_events()
         if x == 0:
             direction = 1
-
 # 여기를 채우세요.
 
 
