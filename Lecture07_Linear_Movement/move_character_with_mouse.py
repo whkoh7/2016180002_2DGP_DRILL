@@ -47,7 +47,7 @@ while draw:
     update_canvas()
     frame = (frame + 1) % 8
     if running is True:
-        if C_x == F_x and C_y == F_y:
+        if 1 > (C_x - F_x) > -1 and 1 > (C_y - F_y) > -1:
             i = 0
             running = False
         elif running is True and i != 100:
