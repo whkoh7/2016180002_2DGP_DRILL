@@ -1,6 +1,6 @@
 import turtle
 import random
-
+from pico2d import *
 
 def stop():
     turtle.bye()
@@ -115,5 +115,7 @@ point3 = (300, -300)
 point4 = (-200, -200)
 prepare_turtle_canvas()
 # draw_curve_3_points(point1, point2, point3)
+delay(5)
 draw_curve_4_points(point1, point2, point3, point4)
+
 turtle.done()
