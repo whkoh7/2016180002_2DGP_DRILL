@@ -73,7 +73,11 @@ def handle_events():
 
 # initialization code
 open_canvas()
-boy = Boy()
+pc_ball_21=random.randint(0,20)
+pc_ball_41=20-pc_ball_21
+
+balls21=[Ball_21() for i in range(pc_ball_21)]
+balls41=[Ball_41() for i in range(pc_ball_41)]
 team = [Boy() for i in range(11)]
 grass = Grass()
 running = True
