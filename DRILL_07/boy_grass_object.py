@@ -13,14 +13,14 @@ class Grass:
 
 class Ball_21:
     def __init__(self):
-        self.x, self.y = random.randint(0, 600), 599
+        self.x, self.y = random.randint(0, 750), 599
         self.image = load_image('ball21x21.png')
-        self.speed = random.randint(5, 20)
+        self.speed = random.randint(5, 10)
         self.move = True
 
     def update(self):
-        if 96 > self.y > 90:
-            self.y = 90
+        if 70 >= self.y >= 60:
+            self.y = 60
             self.move = False
         if self.move:
             self.y -= self.speed
@@ -31,14 +31,14 @@ class Ball_21:
 
 class Ball_41:
     def __init__(self):
-        self.x, self.y = random.randint(0, 600), 599
+        self.x, self.y = random.randint(0, 750), 599
         self.image = load_image('ball41x41.png')
-        self.speed = random.randint(5, 20)
+        self.speed = random.randint(5, 10)
         self.move = True
 
     def update(self):
-        if 96 > self.y > 90:
-            self.y = 90
+        if 85 >= self.y >= 75:
+            self.y = 75
             self.move = False
         if self.move:
             self.y -= self.speed
@@ -76,7 +76,7 @@ open_canvas()
 boy = Boy()
 ball_21 = Ball_21()
 ball_41 = Ball_41()
-pc_ball_21 = random.randint(0, 20)
+pc_ball_21 = random.randint(5, 15)
 pc_ball_41 = 20 - pc_ball_21
 
 balls21 = [Ball_21() for i in range(pc_ball_21)]
@@ -84,7 +84,7 @@ balls41 = [Ball_41() for i in range(pc_ball_41)]
 team = [Boy() for i in range(11)]
 grass = Grass()
 running = True
-
+delay(3)
 # game main loop code
 while running:
     handle_events()
@@ -92,9 +92,9 @@ while running:
         boy.update()
 
     for ball_21 in balls21:
-        Ball_21.update()
+        ball_21.update()
     for ball_41 in balls41:
-        Ball_41.update()
+        ball_41.update()
 
     boy.update()
 
@@ -104,9 +104,9 @@ while running:
     for boy in team:
         boy.draw()
         for ball_21 in balls21:
-            Ball_21.draw()
+            ball_21.draw()
         for ball_41 in balls41:
-            Ball_41.draw()
+            ball_41.draw()
     update_canvas()
 
     delay(0.05)
