@@ -73,11 +73,14 @@ def handle_events():
 
 # initialization code
 open_canvas()
-pc_ball_21=random.randint(0,20)
-pc_ball_41=20-pc_ball_21
+boy = Boy()
+ball_21 = Ball_21()
+ball_41 = Ball_41()
+pc_ball_21 = random.randint(0, 20)
+pc_ball_41 = 20 - pc_ball_21
 
-balls21=[Ball_21() for i in range(pc_ball_21)]
-balls41=[Ball_41() for i in range(pc_ball_41)]
+balls21 = [Ball_21() for i in range(pc_ball_21)]
+balls41 = [Ball_41() for i in range(pc_ball_41)]
 team = [Boy() for i in range(11)]
 grass = Grass()
 running = True
@@ -88,6 +91,11 @@ while running:
     for boy in team:
         boy.update()
 
+    for ball_21 in balls21:
+        Ball_21.update()
+    for ball_41 in balls41:
+        Ball_41.update()
+
     boy.update()
 
     clear_canvas()
@@ -95,6 +103,10 @@ while running:
     boy.draw()
     for boy in team:
         boy.draw()
+        for ball_21 in balls21:
+            Ball_21.draw()
+        for ball_41 in balls41:
+            Ball_41.draw()
     update_canvas()
 
     delay(0.05)
