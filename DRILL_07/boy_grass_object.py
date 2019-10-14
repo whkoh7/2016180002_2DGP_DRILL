@@ -11,6 +11,20 @@ class Grass:
         self.image.draw(400, 30)
 
 
+class Ball_21:
+    def __init__(self):
+        self.x, self.y = random.randint(0, 600), 599
+        self.image = load_image('ball21x21.png')
+        self.speed = random.randint(5, 20)
+        move = True
+
+    def update(self):
+        self.y -= self.speed
+
+    def draw(self):
+        self.image.clip_draw(0, 0, 21, 21, self.x, self.y)
+
+
 class Boy:
     def __init__(self):
         self.x, self.y = random.randint(100, 700), 90
