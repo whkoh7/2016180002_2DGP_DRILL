@@ -16,13 +16,35 @@ class Ball_21:
         self.x, self.y = random.randint(0, 600), 599
         self.image = load_image('ball21x21.png')
         self.speed = random.randint(5, 20)
-        move = True
+        self.move = True
 
     def update(self):
-        self.y -= self.speed
+        if 96 > self.y > 90:
+            self.y = 90
+            self.move = False
+        if self.move:
+            self.y -= self.speed
 
     def draw(self):
         self.image.clip_draw(0, 0, 21, 21, self.x, self.y)
+
+
+class Ball_41:
+    def __init__(self):
+        self.x, self.y = random.randint(0, 600), 599
+        self.image = load_image('ball41x41.png')
+        self.speed = random.randint(5, 20)
+        self.move = True
+
+    def update(self):
+        if 96 > self.y > 90:
+            self.y = 90
+            self.move = False
+        if self.move:
+            self.y -= self.speed
+
+    def draw(self):
+        self.image.clip_draw(0, 0, 41, 41, self.x, self.y)
 
 
 class Boy:
