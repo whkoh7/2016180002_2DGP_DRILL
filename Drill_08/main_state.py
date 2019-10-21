@@ -74,11 +74,6 @@ def handle_events():
             game_framework.change_state(title_state)
         elif event.type == SDL_KEYDOWN and event.key == SDLK_p:
             pause()
-            pause_state.button = 1
-            game_framework.push_state(pause_state)
-        elif event.type == SDL_KEYDOWN and event.key == SDLK_o:
-            pause()
-            pause_state.button = 0
             game_framework.push_state(pause_state)
 
 
