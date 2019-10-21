@@ -43,8 +43,7 @@ def handle_events():
             main_state.resume()
 
 
-def update():
-    pass
+def update(): pass
 
 
 def draw():
@@ -53,6 +52,7 @@ def draw():
     clear_canvas()
     main_state.boy.draw()
     main_state.grass.draw()
-    frame = 0
+    frame = (frame + 1) % 2
     pauseImg.clip_draw(frame * 900, 0, 900, 900, 400, 300)
+    delay(0.1)
     update_canvas()
