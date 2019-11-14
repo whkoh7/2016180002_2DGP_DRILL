@@ -90,12 +90,12 @@ def update():
             ball.stop()
             ball.x += brick.velocity
 
-    if collide(grass, boy):
+    if collide(grass, boy) and boy.y <= 80:
         boy.collide_ground_brick()
 
-    if collide(brick, boy) and brick.y <= boy.y - 50 and boy.jump_height < 0:
+    if collide(brick, boy) and boy.y <= 410 and boy.jump_height < 0:
         boy.collide_ground_brick()
-        boy.x+=brick.velocity
+        boy.x += brick.velocity
 
     # fill here for collision check
 
