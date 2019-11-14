@@ -95,6 +95,7 @@ def update():
 
     if collide(brick, boy) and brick.y <= boy.y - 50 and boy.jump_height < 0:
         boy.collide_ground_brick()
+        boy.x+=brick.velocity
 
     # fill here for collision check
 
