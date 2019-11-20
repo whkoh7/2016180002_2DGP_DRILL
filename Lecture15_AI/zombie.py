@@ -7,7 +7,7 @@ import main_state
 
 # zombie Run Speed
 PIXEL_PER_METER = (10.0 / 0.3)  # 10 pixel 30 cm
-RUN_SPEED_KMPH = 10.0  # Km / Hour
+RUN_SPEED_KMPH = 20.0  # Km / Hour
 RUN_SPEED_MPM = (RUN_SPEED_KMPH * 1000.0 / 60.0)
 RUN_SPEED_MPS = (RUN_SPEED_MPM / 60.0)
 RUN_SPEED_PPS = (RUN_SPEED_MPS * PIXEL_PER_METER)
@@ -75,16 +75,33 @@ class Zombie:
         # fill here
         boy = main_state.get_boy()
         distance = (boy.x - self.x) ** 2 + (boy.y - self.y) ** 2
-        if distance < (PIXEL_PER_METER * 10) ** 2:
-            if self.hp>boy.hp:
+        if distance < (PIXEL_PER_METER * 8) ** 2:
+            if self.hp > boy.hp:
                 self.dir = math.atan2(boy.y - self.y, boy.x - self.x)
-            elif self.hp<=boy.hp:
-                self.dir = math.atan2(self.y-boy.y,self.x-boy.x)
+            elif self.hp <= boy.hp:
+                self.dir = math.atan2(self.y - boy.y, self.x - boy.x)
             return BehaviorTree.SUCCESS
         else:
             self.speed = 0
             return BehaviorTree.FAIL
         pass
+
+    def find_ball(self):
+        balls = main_state.get_ball()
+        distance = 0
+        nearest_x, nearest_y = 0, 0
+        for ball in balls:
+            temp = (ball.x - self.x) ** 2 + (ball.y - self.y) ** 2
+            if distance <= temp:
+                distance = temp
+                nearest_x, nearest_y = ball.x, ball.y
+        if distance < (PIXEL_PER_METER * 5) ** 2:
+            self.dir = math.atan2(nearest_y - self.y, nearest_x - self.x)
+            return BehaviorTree.SUCCESS
+        else:
+            pass
+        return BehaviorTree.FAIL
+
 
     def move_to_player(self):
         # fill here
@@ -93,8 +110,8 @@ class Zombie:
         return BehaviorTree.SUCCESS
         pass
 
-    def run_from_player(self):
-        self.speed = RUN_SPEED_PPS * 1.3
+    def move_to_ball(self):
+        self.speed = RUN_SPEED_PPS
         self.calculate_current_position()
         return BehaviorTree.SUCCESS
 
@@ -113,14 +130,24 @@ class Zombie:
 
     def build_behavior_tree(self):
         # fill here
+        root_node = SelectorNode('root')
+
         wander_node = LeafNode("Wander", self.wander)
+
         find_player_node = LeafNode("Find Player", self.find_player)
         move_to_player_node = LeafNode("Move to Player", self.move_to_player)
+
+        find_ball_node = LeafNode("Find Ball", self.find_ball)
+        move_to_ball_node = LeafNode("Move to Ball", self.move_to_ball)
+
+        eat_ball_node = SequenceNode("Eat Ball")
         chase_node = SequenceNode("Chase")
+
+        eat_ball_node.add_children(find_ball_node, move_to_ball_node)
         chase_node.add_children(find_player_node, move_to_player_node)
-        wander_chase_node = SelectorNode("WanderChase")
-        wander_chase_node.add_children(chase_node, wander_node)
-        self.bt = BehaviorTree(wander_chase_node)
+
+        root_node.add_children(chase_node,eat_ball_node,wander_node)
+        self.bt = BehaviorTree(root_node)
         pass
 
     def get_bb(self):

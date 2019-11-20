@@ -34,6 +34,8 @@ def collide(a, b):
 def get_boy():
     return boy
 
+def get_ball():
+    return balls
 
 def enter():
     global balls
