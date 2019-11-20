@@ -10,7 +10,6 @@ from boy import Boy
 from ground import Ground
 from zombie import Zombie
 
-
 name = "MainState"
 
 boy = None
@@ -30,7 +29,6 @@ def collide(a, b):
     return True
 
 
-
 def get_boy():
     return boy
 
@@ -47,8 +45,10 @@ def enter():
     ground = Ground()
     game_world.add_object(ground, 0)
 
+
 def exit():
     game_world.clear()
+
 
 def pause():
     pass
@@ -64,7 +64,7 @@ def handle_events():
         if event.type == SDL_QUIT:
             game_framework.quit()
         elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
-                game_framework.quit()
+            game_framework.quit()
         else:
             boy.handle_event(event)
 
@@ -79,9 +79,3 @@ def draw():
     for game_object in game_world.all_objects():
         game_object.draw()
     update_canvas()
-
-
-
-
-
-
