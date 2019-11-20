@@ -45,6 +45,8 @@ class Zombie:
         self.timer = 1.0  # change direction every 1 sec when wandering
         self.frame = 0
         self.build_behavior_tree()
+        self.font = load_font('ENCR10B.TTF', 16)
+        self.hp=0
 
     def calculate_current_position(self):
         self.frame = (self.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % FRAMES_PER_ACTION
@@ -137,6 +139,7 @@ class Zombie:
             else:
                 Zombie.images['Walk'][int(self.frame)].draw(self.x, self.y, 100, 100)
 
+        self.font.draw(self.x - 50, self.y + 60, '(HP : %2d)' % self.hp, (255, 255, 0))
         draw_rectangle(*self.get_bb())
 
     def handle_event(self, event):

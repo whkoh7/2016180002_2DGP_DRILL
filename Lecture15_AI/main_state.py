@@ -38,7 +38,7 @@ def get_boy():
 def enter():
     global balls
     balls = [Ball() for i in range(20)]
-    game_world.add_objects(balls,1)
+    game_world.add_objects(balls, 1)
 
     global boy
     boy = Boy()
@@ -83,9 +83,11 @@ def update():
             if collide(boy, ball):
                 balls.remove(ball)
                 game_world.remove_object(ball)
-            if collide(zombie,ball):
+                boy.hp += 100
+            if collide(zombie, ball):
                 balls.remove(ball)
                 game_world.remove_object(ball)
+                zombie.hp+=100
 
 
 def draw():
