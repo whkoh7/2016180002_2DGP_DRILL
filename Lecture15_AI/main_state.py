@@ -87,7 +87,14 @@ def update():
             if collide(zombie, ball):
                 balls.remove(ball)
                 game_world.remove_object(ball)
-                zombie.hp+=100
+                zombie.hp += 100
+
+        if collide(zombie, boy):
+            if zombie.hp <= boy.hp:
+                zombie.die()
+            elif zombie.hp > boy.hp:
+                game_world.clear()
+                game_framework.quit()
 
 
 def draw():
