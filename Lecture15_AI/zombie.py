@@ -55,6 +55,10 @@ class Zombie:
         self.x = clamp(50, self.x, 1280 - 50)
         self.y = clamp(50, self.y, 1024 - 50)
 
+    def die(self):
+        self.x,self.y = self.patrol_positions[random.randint(0,5)]
+        self.hp=0
+
     def wander(self):
         # fill here
         self.speed = RUN_SPEED_PPS
