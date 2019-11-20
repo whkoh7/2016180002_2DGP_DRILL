@@ -117,7 +117,7 @@ class Boy:
 
     def get_bb(self):
         # fill here
-        return self.x - 50, self.y - 50, self.x + 50, self.y + 50
+        return self.x - 43, self.y - 43, self.x + 43, self.y + 43
 
 
     def add_event(self, event):

@@ -32,3 +32,6 @@ def all_objects():
         for o in objects[i]:
             yield o
 
+def add_objects(l,layer):
+    objects[layer]+=l
+
