@@ -54,6 +54,8 @@ def enter():
     background.set_center_object(boy)
     boy.set_background(background)
 
+    for ball in balls:
+        ball.set_background(background)
     # fill here
 
 
@@ -87,6 +89,7 @@ def update():
             if collide(boy, ball):
                 balls.remove(ball)
                 game_world.remove_object(ball)
+                boy.point+=1
 
 
 def draw():
